@@ -1,0 +1,35 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc,positioning,fit,backgrounds}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,line width=0.9pt,
+   box/.style={draw,rounded corners=3pt,align=center,inner sep=6pt,line width=1pt,minimum width=3.6cm},
+   lab/.style={align=center,font=\footnotesize}]
+  % nodes
+  \node[box,draw=cRed]   (R)  at (0,3.2) {$\mathbb{R}$\\[1pt]\footnotesize（直线 $=\mathfrak{u}(1)$，万有覆盖）};
+  \node[box,draw=cBlue]  (U1) at (0,0)   {$U(1)=SO(2)=S^1$\\[1pt]\footnotesize $\pi_1=\mathbb{Z}$};
+  \node[box,draw=cGreen,fill=cGreen!5] (SU) at (6,3.2) {$SU(2)=S^3=$ 单位四元数\\[1pt]\footnotesize $\pi_1=0$（\textbf{单连通}）};
+  \node[box,draw=cRed,fill=cRed!5]    (SO) at (6,0)   {$SO(3)=\mathbb{RP}^3$\\[1pt]\footnotesize $\pi_1=\mathbb{Z}/2$};
+  % vertical covering arrows
+  \draw[->,cGreen,line width=1.1pt] (R) -- (U1)
+     node[midway,left,lab,text=cGreen]{$\exp$\\$\infty\!:\!1$ 覆盖};
+  \draw[->,cOrange,line width=1.3pt] (SU) -- (SO)
+     node[midway,right,lab,text=cOrange]{$\Phi$\\\textbf{2:1} 双覆盖};
+  % lie algebra isomorphism note between SU and SO
+  \draw[<->,cGray,dashed] (SU.west) to[bend right=12] node[midway,above,lab,text=cGray,sloped]{$\mathfrak{su}(2)\cong\mathfrak{so}(3)$} (SO.west);
+  % horizontal hint: baby case -> hero case
+  \draw[->,cGray,dashed,line width=0.8pt] (U1) -- (SO)
+     node[midway,below,lab,text=cGray]{维数 $1\ \longrightarrow\ 3$\\“同一套几何，升一维”};
+  % bottom caption
+  \node[lab,text=cGray,align=center] at (3,-1.7)
+    {左：最简单的李群（圆）已经有 $\exp$ 与覆盖；右：同一结构升到三维，$SU(2)$ 单连通地 $2\!:\!1$ 盖住 $SO(3)$。\\
+     李代数把右边两者“拉平”为同一个 $\mathfrak{su}(2)\cong\mathfrak{so}(3)$，而群层面的差别（那个 $2$）恰恰是拓扑（$\pi_1$）。};
+\end{tikzpicture}
+\end{document}

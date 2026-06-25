@@ -1,0 +1,36 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=1.6,>=Stealth,line width=0.9pt]
+  % top sphere SU(2)=S^3
+  \shade[ball color=cBlue!12] (0,2.4) circle (1.15);
+  \draw[cBlue,line width=1.2pt] (0,2.4) circle (1.15);
+  \draw[cBlue!70,dashed] (0,2.4) ellipse (1.15 and 0.4);
+  \node[cBlue] at (-1.55,3.3) {$SU(2)=S^3$};
+  \fill[cOrange] (0,3.55) circle (0.06) node[above right] {$q$};
+  \fill[cGreen] (0,1.25) circle (0.06) node[below right] {$-q$};
+  \draw[cGray,dashed] (0,3.55)--(0,1.25);
+  \node[cGray,left] at (-0.05,2.4) {\footnotesize 对径点};
+  % bottom: SO(3)
+  \shade[ball color=cRed!10] (0,-1.5) circle (0.95);
+  \draw[cRed,line width=1.2pt] (0,-1.5) circle (0.95);
+  \draw[cRed!70,dashed] (0,-1.5) ellipse (0.95 and 0.33);
+  \node[cRed] at (1.55,-1.5) {$SO(3)$};
+  \fill (0,-1.5) circle (0.06) node[below left] {$R$};
+  % two arrows q,-q -> R
+  \draw[cOrange,line width=1.1pt,->] (0.35,3.45) .. controls (2.3,1.4) and (2.0,-0.6) .. (0.55,-1.2);
+  \draw[cGreen,line width=1.1pt,->] (-0.35,1.35) .. controls (-1.9,0.4) and (-1.8,-0.7) .. (-0.55,-1.25);
+  \node[cGray] at (2.45,1.1) {$\Phi$};
+  \node[align=center] at (0,-2.95)
+    {$\Phi:SU(2)\to SO(3)$ 是 \textbf{2 : 1} 满同态（\textbf{双覆盖}）\\[1pt]
+     \footnotesize\color{cGray} $q$ 与 $-q$ 给出同一个旋转 $R$；在李代数层面 $\mathfrak{su}(2)\cong\mathfrak{so}(3)$ 却是同构。};
+\end{tikzpicture}
+\end{document}

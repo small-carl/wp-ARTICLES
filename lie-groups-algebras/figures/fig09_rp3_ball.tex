@@ -1,0 +1,35 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=2.0,>=Stealth,line width=0.9pt]
+  \shade[ball color=cGray!16] (0,0) circle (1.55);
+  \draw[cBlue,line width=1.3pt] (0,0) circle (1.55);
+  \draw[cBlue!55,dashed] (0,0) ellipse (1.55 and 0.52);
+  \node[cBlue] at (133:1.9) {$SO(3)\cong\mathbb{RP}^3$};
+  % interior point = rotation by theta about n
+  \draw[cOrange,line width=1.3pt,->] (0,0)--(125:0.95);
+  \fill[cOrange] (125:0.95) circle (0.045);
+  \node[cOrange,above left] at (125:0.95) {$\theta\,\hat n$};
+  % antipodal boundary points (vertical), identified
+  \fill[cRed] (0,1.55) circle (0.05) node[above] {$P$};
+  \fill[cRed] (0,-1.55) circle (0.05) node[below] {$-P$};
+  \node[cRed,right] at (0.55,0.18) {\footnotesize $P\sim -P$};
+  \node[cRed,right] at (0.55,-0.05) {\footnotesize （$\theta=\pi$：同一旋转）};
+  % the noncontractible loop gamma along the vertical diameter
+  \draw[cGreen,line width=1.4pt,->] (-0.07,0)--(-0.07,1.5);
+  \draw[cGreen,line width=1.4pt,->] (-0.07,-1.5)--(-0.07,-0.04);
+  \node[cGreen,left] at (-0.1,0.8) {$\gamma$};
+  \fill[cGray] (0,0) circle (0.03);
+  \node[align=center] at (0,-2.15)
+    {\footnotesize\color{cGray} 实心球（半径 $\pi$）：内点 $=$ 绕 $\hat n$ 转 $\theta\in[0,\pi]$；对径边界点粘合。\\
+     \footnotesize\color{cGray} 闭路 $\gamma$（中心$\to\!P\!\sim\!-P\!\to$中心）无法收缩，$\gamma^2$ 却可以 $\;\Rightarrow\; \pi_1\big(SO(3)\big)=\mathbb{Z}/2$。};
+\end{tikzpicture}
+\end{document}

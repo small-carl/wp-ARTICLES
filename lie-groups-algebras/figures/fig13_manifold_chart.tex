@@ -1,0 +1,56 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,line width=0.9pt]
+  % ===== Panel A: a curved surface, one patch flattened to R^2 (a chart) =====
+  \begin{scope}[shift={(-3.5,0)}]
+    \shade[ball color=cBlue!12] (0,0) circle (1.25);
+    \draw[cBlue,line width=1.2pt] (0,0) circle (1.25);
+    \node[cBlue] at (-1.0,1.05) {$M$};
+    \begin{scope}
+      \clip (0,0) circle (1.25);
+      \fill[cOrange!22] (0.5,0.55) ellipse (0.55 and 0.34);
+    \end{scope}
+    \draw[cOrange,line width=1pt] (0.5,0.55) ellipse (0.55 and 0.34);
+    \node[cOrange] at (0.5,0.55) {\scriptsize $U$};
+    % chart map to a flat coordinate patch
+    \draw[->,cGray,line width=1pt] (1.0,0.2) to[bend left=18] (2.05,-0.05);
+    \node[cGray] at (1.55,0.55) {$\varphi$};
+    \begin{scope}[shift={(2.7,-0.05)}]
+      \draw[cOrange!70,fill=cOrange!8] (-0.6,-0.45) rectangle (0.6,0.45);
+      \draw[cGray!50,step=0.3] (-0.6,-0.45) grid (0.6,0.45);
+      \node[cGray,below] at (0,-0.5) {\scriptsize $\mathbb{R}^n$ 的开集};
+    \end{scope}
+    \node[align=center] at (0.4,-1.75)
+      {\footnotesize \textbf{流形}：每点都有邻域 $U$\\\footnotesize 同胚于 $\mathbb{R}^n$ 的开集（坐标卡 $\varphi$）};
+  \end{scope}
+  % ===== Panel B: torus — locally like R^2, globally not =====
+  \begin{scope}[shift={(3.3,0.05)}]
+    % torus
+    \draw[cBlue,line width=1.2pt,fill=cBlue!7] (0,0) ellipse (1.5 and 0.95);
+    \begin{scope}
+      \clip (0,0) ellipse (1.5 and 0.95);
+      \fill[white] (0,-0.18) ellipse (0.78 and 0.52);
+    \end{scope}
+    \draw[cBlue!80] (-0.78,-0.1) .. controls (-0.35,-0.55) and (0.35,-0.55) .. (0.78,-0.1);
+    \draw[cBlue!80] (-0.6,-0.26) .. controls (-0.3,0.05) and (0.3,0.05) .. (0.6,-0.26);
+    \node[cBlue] at (-1.15,0.78) {$T^2$};
+    % a small local patch flattened
+    \draw[cOrange,line width=1pt] (0.7,0.55) ellipse (0.34 and 0.2);
+    \fill[cOrange!22] (0.7,0.55) ellipse (0.34 and 0.2);
+    \draw[->,cGray] (1.05,0.55) to[bend left=12] (1.7,0.55);
+    \draw[cOrange!70,fill=cOrange!8] (1.78,0.32) rectangle (2.4,0.78);
+    \draw[cGray!50,step=0.2] (1.78,0.32) grid (2.4,0.78);
+    \node[align=center] at (0.4,-1.7)
+      {\footnotesize 环面 $T^2$：\textbf{局部}像 $\mathbb{R}^2$，\\\footnotesize \textbf{整体}却是甜甜圈（卷起来了）};
+  \end{scope}
+\end{tikzpicture}
+\end{document}

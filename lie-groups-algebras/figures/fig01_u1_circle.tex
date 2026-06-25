@@ -1,0 +1,38 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc,angles,quotes,decorations.markings,positioning}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\begin{document}
+\begin{tikzpicture}[scale=2.6,>=Stealth,line width=0.9pt]
+  % axes
+  \draw[cGray,->] (-1.45,0)--(1.55,0) node[below right]{$\mathrm{Re}$};
+  \draw[cGray,->] (0,-1.45)--(0,1.55) node[left]{$\mathrm{Im}$};
+  % unit circle = U(1)
+  \draw[cBlue,line width=1.3pt] (0,0) circle (1);
+  \node[cBlue] at (135:1.22) {$U(1)\cong SO(2)$};
+  % identity element
+  \fill[cGray] (1,0) circle (0.024);
+  \node[cGray,below right=0pt] at (1,0) {$1=\mathrm{id}$};
+  % point e^{i theta}
+  \def\th{54}
+  \draw[cOrange,->,line width=1.1pt] (0,0)--(\th:1);
+  \fill[cOrange] (\th:1) circle (0.03);
+  \node[cOrange,above right=-1pt] at (\th:1) {$g=e^{i\theta}$};
+  % angle arc
+  \draw[cGray,dashed] (0,0)--(1.18,0);
+  \draw[cOrange,line width=1pt] (0.32,0) arc (0:\th:0.32);
+  \node[cOrange] at (27:0.49) {$\theta$};
+  % rotation along the circle (the group action)
+  \draw[cGreen,->,line width=1.1pt] (4:1.13) arc (4:\th:1.13);
+  \node[cGreen] at (29:1.32) {\small 转 $\theta$};
+  % group law annotation
+  \node[align=center] at (0,-1.78)
+    {$g_1\cdot g_2=e^{i\theta_1}e^{i\theta_2}=e^{i(\theta_1+\theta_2)}$\\[1pt]
+     \footnotesize\color{cGray}（群运算 = 角度相加）};
+\end{tikzpicture}
+\end{document}

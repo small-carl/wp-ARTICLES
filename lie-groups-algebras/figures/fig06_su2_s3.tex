@@ -1,0 +1,32 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=1.7,>=Stealth,line width=0.9pt]
+  % a 3-sphere drawn schematically as a 2-sphere with grid
+  \shade[ball color=cBlue!12] (0,0) circle (1.5);
+  \draw[cBlue,line width=1.3pt] (0,0) circle (1.5);
+  \draw[cBlue!70,dashed] (0,0) ellipse (1.5 and 0.5);
+  \draw[cBlue!70,dashed] (0,0) ellipse (0.5 and 1.5);
+  \node[cBlue] at (-1.15,1.28) {$S^3$};
+  % the unit quaternions 1,i,j,k as marked directions
+  \fill (0,1.5) circle (0.045) node[above] {$\mathbf 1$};
+  \fill (0,-1.5) circle (0.045) node[below] {$-\mathbf 1$};
+  \fill (1.5,0) circle (0.045) node[right] {$i$};
+  \fill (-1.5,0) circle (0.045) node[left] {$j$};
+  \fill (0.62,-0.22) circle (0.04) node[below right=-2pt] {$k$};
+  \node[align=center] at (0,-2.35)
+    {$SU(2)=\left\{\begin{pmatrix}\alpha&\beta\\[-1pt]-\bar\beta&\bar\alpha\end{pmatrix}:|\alpha|^2+|\beta|^2=1\right\}$};
+  \node[align=center] at (0,-3.05)
+    {$\alpha=x_1+ix_2,\ \beta=x_3+ix_4\ \Longrightarrow\ (x_1,x_2,x_3,x_4)\in S^3\subset\mathbb{R}^4$};
+  \node[cGray,align=center] at (0,-3.5)
+    {\footnotesize $SU(2)$ 就是四维空间里的“三维球面”，也等同于单位四元数。};
+\end{tikzpicture}
+\end{document}

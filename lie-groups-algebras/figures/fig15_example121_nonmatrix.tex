@@ -1,0 +1,39 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,line width=0.9pt]
+  % base plane R^2 as a parallelogram (perspective)
+  \fill[cBlue!7] (-2.4,-0.2) -- (1.8,-0.2) -- (2.8,0.7) -- (-1.4,0.7) -- cycle;
+  \draw[cBlue!60] (-2.4,-0.2) -- (1.8,-0.2) -- (2.8,0.7) -- (-1.4,0.7) -- cycle;
+  \node[cBlue] at (-1.95,-0.5) {\footnotesize $\mathbb{R}^2$ 底 $(x,y)$};
+  \draw[cGray,->] (-0.95,0.05)--(0.35,0.05) node[below] {\scriptsize $x$};
+  \draw[cGray,->] (-0.95,0.05)--(-0.55,0.45) node[left] {\scriptsize $y$};
+  % three fibers (vertical circles S^1) over three base points
+  \foreach \bx/\by in {-1.7/0.0, 0.4/0.2, 1.7/0.4}{
+    \fill[cGray] (\bx,\by) circle (0.03);
+    \draw[cGray,dashed] (\bx,\by)--(\bx,\by+0.55);
+    \draw[cOrange!85,line width=1pt] (\bx,\by+1.05) ellipse (0.24 and 0.52);
+  }
+  \node[cOrange] at (-1.7,1.75) {\footnotesize $S^1$ 纤维};
+  \fill[cBlue] (-1.7,1.57) circle (0.04) node[left] {\scriptsize $u_1$};
+  \fill[cGreen] (0.4,1.77) circle (0.04) node[left] {\scriptsize $u_2$};
+  % the extra twist on the third (product) fiber
+  \draw[cRed,->,line width=1pt] (2.2,1.65) arc (35:325:0.32);
+  \node[cRed] at (2.72,1.4) {\footnotesize $+\,x_1y_2$};
+  \fill[cRed] (1.7,1.93) circle (0.04);
+  \node[align=center] at (0.2,-1.15)
+    {\footnotesize $G=\mathbb{R}\times\mathbb{R}\times S^1$：每个底点头顶一个圆 $S^1$；群乘法\\
+     \footnotesize $(x_1,y_1,u_1)\cdot(x_2,y_2,u_2)=\big(x_1{+}x_2,\ y_1{+}y_2,\ e^{i x_1 y_2}\,u_1u_2\big)$ 让纤维圆\textbf{多拧} $x_1y_2$};
+  \node[align=center,text=cGray] at (0.2,-2.0)
+    {\footnotesize 它是货真价实的光滑李群（流形 $\mathbb{R}^2\times S^1$ + 光滑乘法、求逆），\\
+     \footnotesize 却\textbf{不能}嵌进任何矩阵群 $GL(n)$——“不是每个李群都是矩阵李群”（Hall 例 1.21 / §4.8）。};
+\end{tikzpicture}
+\end{document}

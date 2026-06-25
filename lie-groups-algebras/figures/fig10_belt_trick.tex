@@ -1,0 +1,37 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=1.0,>=Stealth,line width=0.9pt]
+  % ---- top row: 360 degrees ----
+  \node[cGray] at (-3.55,0.95) {转 $360^\circ$};
+  \draw[cGray,fill=cGray!15] (-3.05,0.55) rectangle (-2.75,1.35);   % wall
+  \draw[cBlue,line width=1.1pt,domain=0:4,samples=120,variable=\s]
+    plot ({-2.75+\s},{0.95+0.17*cos(90*\s)});
+  \draw[cBlue,line width=1.1pt,domain=0:4,samples=120,variable=\s]
+    plot ({-2.75+\s},{0.95-0.17*cos(90*\s)});
+  \shade[ball color=cOrange!60] (1.45,0.95) circle (0.16);          % the object
+  \node[cRed] at (2.05,0.95) {\large $\boldsymbol{\times}$};
+  \node[cRed,right] at (2.25,0.95) {\footnotesize 拧住，解不开（$q\!\to\!-q$，$\ne$ 恒等）};
+  % ---- bottom row: 720 degrees ----
+  \node[cGray] at (-3.55,-0.95) {转 $720^\circ$};
+  \draw[cGray,fill=cGray!15] (-3.05,-1.35) rectangle (-2.75,-0.55);
+  \draw[cGreen!75,line width=1.1pt,domain=0:4,samples=160,variable=\s]
+    plot ({-2.75+\s},{-0.95+0.17*cos(180*\s)});
+  \draw[cGreen!75,line width=1.1pt,domain=0:4,samples=160,variable=\s]
+    plot ({-2.75+\s},{-0.95-0.17*cos(180*\s)});
+  \shade[ball color=cOrange!60] (1.45,-0.95) circle (0.16);
+  \node[cGreen] at (2.05,-0.95) {\large $\boldsymbol{\checkmark}$};
+  \node[cGreen,right] at (2.25,-0.95) {\footnotesize 可解开复原（$=$ 恒等，回到 $q$）};
+  \node[align=center] at (-0.3,-2.1)
+    {\footnotesize\color{cGray} 狄拉克“皮带戏法”：与背景相连的物体转 $360^\circ$ 后皮带拧住、解不开；\\
+     \footnotesize\color{cGray} 再转一圈（共 $720^\circ$）反而能解开。这正是 $\pi_1\big(SO(3)\big)=\mathbb{Z}/2$ 的物理化身——旋量。};
+\end{tikzpicture}
+\end{document}

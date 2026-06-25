@@ -1,0 +1,36 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=1.7,>=Stealth,line width=0.9pt]
+  \coordinate (O) at (0,0);
+  % axes
+  \draw[cGray,->] (O)--(-1.35,-0.85) node[below left]{$x$};
+  \draw[cGray,->] (O)--(2.0,0) node[right]{$y$};
+  \draw[cGray,->] (O)--(0,2.0) node[above]{$z$};
+  % L_z : rotation about z, in the (x,y) plane -> horizontal ellipse
+  \draw[cBlue,line width=1.2pt,->] (0.8,0.06) arc (-12:300:0.8 and 0.30);
+  \node[cBlue] at (1.05,0.5) {$L_z$};
+  % L_y : rotation about y -> ellipse in the (x,z) plane, wrapping the y-axis
+  \begin{scope}[shift={(1.05,0)}]
+    \draw[cGreen,line width=1.2pt,->] (0,0.55) arc (90:410:0.22 and 0.55);
+  \end{scope}
+  \node[cGreen] at (1.5,0.62) {$L_y$};
+  % L_x : rotation about x -> ellipse wrapping the x-axis (lower-left)
+  \begin{scope}[shift={(-0.72,-0.45)},rotate=212]
+    \draw[cOrange,line width=1.2pt,->] (0.5,0) arc (0:312:0.5 and 0.20);
+  \end{scope}
+  \node[cOrange] at (-1.15,0.05) {$L_x$};
+  \fill[cGray] (O) circle (0.03);
+  \node[align=center] at (0.35,-1.55)
+    {$[L_x,L_y]=L_z,\quad [L_y,L_z]=L_x,\quad [L_z,L_x]=L_y$\\[1pt]
+     \footnotesize\color{cGray} $\mathfrak{so}(3)$ 由“绕 $x,y,z$ 轴的无穷小转动”三件生成元张成。};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,36 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[scale=2.6,>=Stealth,line width=0.9pt]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (1,0);      % after X
+  \coordinate (B) at (0,1);      % after Y
+  \coordinate (P) at (1.24,0.98); % X then Y
+  \coordinate (Q) at (0.98,1.24); % Y then X
+  % path 1: first X, then Y  (blue)
+  \draw[cBlue,->,line width=1.2pt] (O)--(A) node[midway,below] {$X$};
+  \draw[cBlue,->,line width=1.2pt] (A)--(P) node[midway,right] {$Y$};
+  \node[cBlue] at (1.72,0.55) {\footnotesize 先 $X$ 后 $Y$};
+  % path 2: first Y, then X  (orange)
+  \draw[cOrange,->,line width=1.2pt] (O)--(B) node[midway,left] {$Y$};
+  \draw[cOrange,->,line width=1.2pt] (B)--(Q) node[midway,above] {$X$};
+  \node[cOrange] at (0.30,1.5) {\footnotesize 先 $Y$ 后 $X$};
+  % the gap = bracket
+  \draw[cRed,line width=1.6pt,->] (P)--(Q);
+  \node[cRed] at (1.62,1.3) {$[X,Y]$};
+  \draw[cRed,thin,->] (1.5,1.26)--(1.16,1.13);
+  \fill[cGray] (O) circle (0.025);
+  \node at (0.6,-0.55) {$[X,Y]=XY-YX$};
+  \node[cGray,align=center] at (0.6,-0.82)
+    {\footnotesize 李括号 $=$ 两个无穷小对称“交换次序”后合不拢的缺口；\\[-1pt]
+     \footnotesize 例如 $\mathfrak{so}(3)$：$[L_x,L_y]=L_z,\ [L_y,L_z]=L_x,\ [L_z,L_x]=L_y$。};
+\end{tikzpicture}
+\end{document}

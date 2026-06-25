@@ -1,0 +1,52 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,line width=0.9pt]
+  % ===== Panel A: lines through the origin = antipodal points on the sphere =====
+  \begin{scope}[shift={(-3.2,0)}]
+    \shade[ball color=cBlue!12] (0,0) circle (1.45);
+    \draw[cBlue,line width=1.2pt] (0,0) circle (1.45);
+    \draw[cBlue!55,dashed] (0,0) ellipse (1.45 and 0.5);
+    \fill[cGray] (0,0) circle (0.035);
+    \node[cGray,below right=-2pt] at (0,0) {\scriptsize $O$};
+    \draw[cOrange,line width=1pt] (52:1.45)--(232:1.45);
+    \fill[cOrange] (52:1.45) circle (0.055) node[above right=-2pt] {$u$};
+    \fill[cOrange] (232:1.45) circle (0.055) node[below left=-2pt] {$-u$};
+    \draw[cGreen,line width=1pt] (124:1.45)--(304:1.45);
+    \fill[cGreen] (124:1.45) circle (0.05);
+    \fill[cGreen] (304:1.45) circle (0.05);
+    \draw[cRed,line width=1pt] (-6:1.45)--(174:1.45);
+    \fill[cRed] (-6:1.45) circle (0.05);
+    \fill[cRed] (174:1.45) circle (0.05);
+    \node[align=center] at (0,-2.05)
+      {\footnotesize 过原点的\textbf{直线} $\leftrightarrow$ 球面一对\textbf{对径点} $\pm u$\\
+       $\mathbb{RP}^2=\{\text{过原点直线}\}=S^2/(u\sim -u)$};
+  \end{scope}
+  \node at (0,0.05) {\large $\cong$};
+  % ===== Panel B: closed disk with antipodal boundary identification =====
+  \begin{scope}[shift={(3.2,0)}]
+    \fill[cBlue!6] (0,0) circle (1.45);
+    \draw[cBlue,line width=1.3pt] (0,0) circle (1.45);
+    \node[cBlue,align=center] at (0,0.05) {\footnotesize $B^2$ 内部\\\footnotesize 一一对应};
+    \fill[cOrange] (52:1.45) circle (0.055) node[above right=-2pt] {$P$};
+    \fill[cOrange] (232:1.45) circle (0.055) node[below left=-2pt] {$-P$};
+    \draw[cOrange,dashed,->] (52:1.62) to[bend left=22] (232:1.62);
+    \fill[cGreen] (128:1.45) circle (0.05) node[above left=-2pt] {$Q$};
+    \fill[cGreen] (308:1.45) circle (0.05) node[below right=-2pt] {$-Q$};
+    \draw[cGreen,dashed,->] (308:1.62) to[bend left=22] (128:1.62);
+    \node[align=center] at (0,-2.05)
+      {\footnotesize 取上半球投影到赤道圆盘 $B^2$\\
+       $=B^2/(\partial:\ P\sim -P)$（只剩\textbf{边界}还粘）};
+  \end{scope}
+  \node[align=center,text=cGray] at (0,-3.0)
+    {\footnotesize 同理 $\mathbb{RP}^3=\{\mathbb{R}^4\text{ 中过原点直线}\}=S^3/\pm=B^3/(\text{边界对径})$，正是 $SO(3)$ 的轴–角实心球模型。};
+\end{tikzpicture}
+\end{document}
