@@ -1,0 +1,52 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,calc,positioning,fit,backgrounds}
+\definecolor{cBlue}{RGB}{37,99,235}
+\definecolor{cOrange}{RGB}{234,88,12}
+\definecolor{cGray}{RGB}{100,116,139}
+\definecolor{cGreen}{RGB}{22,163,74}
+\definecolor{cRed}{RGB}{220,38,38}
+\begin{document}
+\begin{tikzpicture}[>=Stealth,line width=0.9pt,
+   box/.style={draw,rounded corners=3pt,align=center,inner sep=6pt,line width=1pt,
+               minimum width=3.5cm,minimum height=1.5cm},
+   sbox/.style={draw,rounded corners=3pt,align=center,inner sep=4pt,line width=0.9pt,font=\small},
+   lab/.style={align=center,font=\footnotesize}]
+
+  % ---------- Row 1: the variable-compression pipeline ----------
+  \node[box,draw=cBlue,fill=cBlue!4] (P) at (0,0)
+     {一个 PDE\\[2pt]$\Delta(x,t,u,u_x,u_t,\dots)=0$\\[1pt]\footnotesize 多个自变量、解空间巨大};
+  \node[box,draw=cOrange,fill=cOrange!6] (X) at (5.4,0)
+     {对称生成元（旋钮）\\[2pt]$X=\xi\,\partial_x+\tau\,\partial_t+\phi\,\partial_u$\\[1pt]\footnotesize 作用在 $(x,t,u)$ 上的向量场 $=\mathfrak g$};
+  \node[box,draw=cGreen,fill=cGreen!6] (O) at (10.8,0)
+     {一个 ODE\\[2pt]在相似变量 $z$ 中\\[1pt]\footnotesize 少了一个自变量};
+  \draw[->,cGray,line width=1.1pt] (P) -- (X) node[midway,above,lab,text=cGray]{求对称};
+  \draw[->,cGreen,line width=1.2pt] (X) -- (O) node[midway,above,lab,text=cGreen]{沿对称约化};
+  \node[lab,text=cGray] at (5.4,-1.45)
+     {每拧一个对称“旋钮”，就消去一个自变量——这正是“把对称当变量压缩工具”};
+
+  % ---------- Row 2: the Burgers concrete instance ----------
+  \node[sbox,draw=cRed,fill=cRed!4] (B1) at (0,-3.5)
+     {$u_t+u\,u_x=\nu\,u_{xx}$\\[1pt]\footnotesize 粘性 Burgers};
+  \node[sbox,draw=cRed,fill=cRed!4,right=1.45cm of B1] (B2)
+     {$z=x-ct$\\[1pt]$u=U(z)$};
+  \node[sbox,draw=cRed,fill=cRed!4,right=1.2cm of B2] (B3)
+     {$\nu U''=(U-c)\,U'$};
+  \node[sbox,draw=cRed,fill=cRed!4,right=1.2cm of B3] (B4)
+     {$U=c-k\tanh\dfrac{kz}{2\nu}$\\[1pt]\footnotesize 行波/激波解（精确）};
+  \draw[->,cRed] (B1) -- (B2) node[midway,above,lab,text=cRed]{平移对称\\$\partial_t,\partial_x$};
+  \draw[->,cRed] (B2) -- (B3) node[midway,above,lab,text=cRed]{代入};
+  \draw[->,cRed] (B3) -- (B4) node[midway,above,lab,text=cRed]{解出};
+
+  % ---------- Row 3: catalogue of canonical PDE-symmetry groups ----------
+  \node[lab,text=cBlue] at (5.4,-5.1) {\textbf{典型 PDE 对称群（旋钮的种类）}};
+  \node[lab,align=center] at (5.4,-6.05)
+    {缩放 $(\mathbb{R}_{>0},\times)\ \to\ $相似解 / 量纲分析（Buckingham $\Pi$）；\quad
+     伽利略 $\mathrm{Gal}\ \to\ $热、扩散方程\\[3pt]
+     庞加莱 $ISO(1,3)\ \to\ $波动 / Klein--Gordon / Maxwell / Dirac；\quad
+     共形 $\mathrm{Conf}\ \to\ $Laplace、波动\\[3pt]
+     薛定谔 $\mathrm{Sch}=SL(2,\mathbb{R})\ltimes\mathrm{Gal}\ \to\ $自由热方程的最大对称};
+\end{tikzpicture}
+\end{document}
